@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import styled from "styled-components";
 import { getProducts } from "../../services/apiProducts";
-import { productsTypes } from "../../types/Products";
 import ProductCard from "./ProductCard";
 import { useAppSelector } from "../../store";
+import { productsTypes } from "../../types/Products";
 
 const StyledProducts = styled.div`
   padding: 0 2rem;

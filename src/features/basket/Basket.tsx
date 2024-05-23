@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { clear, toggle } from "./basketSlice";
-import { productsTypes } from "../../types/Products";
 import BasketProduct from "./BasketProduct";
+import { productsTypes } from "../../types/Products";
 
 const Overlay = styled.div`
   width: 100%;

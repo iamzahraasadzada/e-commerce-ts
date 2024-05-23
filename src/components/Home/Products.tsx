@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../../services/apiProducts";
-import { productsTypes } from "../../types/Products";
 import Product from "./Product";
+import { productsTypes } from "../../types/Products";
 
 const StyledProducts = styled.div`
   padding: 0 2rem;
@@ -47,7 +47,7 @@ interface ProductsProps {
 
 export default function Products({ title, first, last }: ProductsProps) {
   const { data: products } = useQuery<productsTypes[]>({
-    queryKey: ["products"],
+    queryKey: ["salam"],
     queryFn: getProducts,
   });
 

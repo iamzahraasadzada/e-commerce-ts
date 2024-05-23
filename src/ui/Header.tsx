@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Logo from "./Logo";
 import Navbar from "./Navbar";
-import Buttons from "./HeaderButtons";
 import { useAppSelector } from "../store";
 import Basket from "../features/basket/Basket";
 import SearchBar from "../components/Search/SearchBar";
@@ -28,7 +27,6 @@ export default function Header() {
         <Logo />
         <Navbar />
         <SearchBar />
-        <Buttons />
       </Container>
       {basket ? <Basket /> : null}
     </StyledHeader>

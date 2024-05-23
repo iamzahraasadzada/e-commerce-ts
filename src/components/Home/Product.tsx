@@ -38,6 +38,12 @@ const H5 = styled.h5`
   font-size: 1.8rem;
 `;
 
+const P = styled.p`
+  color: #818181;
+  line-height: 2.4rem;
+  font-size: 1.6rem;
+`;
+
 interface ProductProps {
   data: productsTypes;
 }
@@ -46,10 +52,11 @@ export default function Product({ data }: ProductProps) {
   return (
     <StyledProduct to={`/product/${data?.id}`}>
       <ImageSide>
-        <Image src={data.image} alt={data.title} />
+        <Image src={data.img} alt={data.name} />
       </ImageSide>
       <TextSide>
-        <H5>{data.title}</H5>
+        <H5>{data.name}</H5>
+        <P>{data.brand}</P>
       </TextSide>
     </StyledProduct>
   );

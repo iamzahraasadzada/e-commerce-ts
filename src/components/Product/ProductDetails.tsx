@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getProduct } from "../../services/apiProducts";
-import { productTypes } from "../../types/Product";
 import { useEffect } from "react";
 import AddBasketButton from "../../features/basket/AddBasketButton";
 import { FaArrowLeftLong } from "react-icons/fa6";
+import { productsTypes } from "../../types/Products";
 
 const StyledeProductDetails = styled.div`
   padding: 5rem 0;
@@ -60,6 +60,10 @@ const TextSide = styled.div`
   justify-content: center;
   gap: 1.2rem;
 `;
+const Span = styled.span`
+  color: #818181;
+  font-size: 1.4rem;
+`;
 
 const H1 = styled.h1`
   color: #1a1a1a;
@@ -85,7 +89,7 @@ const Divider = styled.div`
 export default function ProductDetails() {
   const { productId } = useParams();
 
-  const { isLoading, data, refetch } = useQuery<productTypes>({
+  const { isLoading, data, refetch } = useQuery<productsTypes>({
     queryKey: ["product"],
     queryFn: () => getProduct(productId),
   });
@@ -94,10 +98,8 @@ export default function ProductDetails() {
     refetch();
   }, [productId, refetch]);
 
-  let productDetails: productTypes;
-  if (!isLoading && data) {
-    productDetails = data;
-  }
+  const productDetails: productsTypes | undefined =
+    !isLoading && data ? data : undefined;
 
   return (
     <StyledeProductDetails>
@@ -108,17 +110,17 @@ export default function ProductDetails() {
         </BackButton>
         <ProductModal>
           <ImageSide>
-            <Image src={productDetails?.image} alt={productDetails?.title} />
+            <Image src={productDetails?.img} alt={productDetails?.name} />
           </ImageSide>
           <TextSide>
-            <H1>{productDetails?.title}</H1>
+            <Span>{productDetails?.brand}</Span>
+            <H1>{productDetails?.name}</H1>
             <P>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
               placeat similique dicta nulla praesentium deserunt. Corporis
               repellendus deleniti dolores eligendi.
             </P>
             <Divider />
-
             <H5>$ {productDetails?.price.toFixed(2)}</H5>
             <AddBasketButton data={productDetails} className="some" />
           </TextSide>

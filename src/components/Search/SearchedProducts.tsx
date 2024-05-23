@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { useAppSelector } from "../../store";
 import { useQuery } from "@tanstack/react-query";
 import { getSearchedProducts } from "../../services/apiProducts";
-import { productTypes } from "../../types/Product";
 import NotFound from "./NotFound";
 import ProductCard from "../Shop/ProductCard";
+import { productsTypes } from "../../types/Products";
 
 const StyledSearchedProducts = styled.div`
   padding: 0 2rem;
@@ -28,7 +28,7 @@ export default function SearchedProducts() {
     (store) => store.basket.basketProducts
   );
 
-  const { data } = useQuery<productTypes[] | null>({
+  const { data } = useQuery<productsTypes[] | null>({
     queryKey: ["products"],
     queryFn: () => getSearchedProducts(productName),
   });

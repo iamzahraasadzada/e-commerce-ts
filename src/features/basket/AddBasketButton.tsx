@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { productsTypes } from "../../types/Products";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { addProduct } from "./basketSlice";
+import { productsTypes } from "../../types/Products";
 
 const StyledAddBasketButton = styled.button`
   font-size: 1.2rem;

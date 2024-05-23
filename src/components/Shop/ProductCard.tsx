@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { FaCheck } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { productsTypes } from "../../types/Products";
 import AddBasketButton from "../../features/basket/AddBasketButton";
 import RemoveBasket from "../../features/basket/RemoveBasket";
+import { productsTypes } from "../../types/Products";
 
 const StyledProductCart = styled.div`
   position: relative;
@@ -83,6 +83,14 @@ const H5 = styled.h5`
   margin-top: 1.4rem;
 `;
 
+const P = styled.p`
+  margin-top: 0;
+  font-size: 1.2rem;
+  color: #b6b6b6;
+  font-style: italic;
+  line-height: 2.4rem;
+`;
+
 interface productCardProps {
   data: productsTypes;
   isSelected: boolean;
@@ -97,10 +105,11 @@ export default function ProductCard({ data, isSelected }: productCardProps) {
         <CardContent className="card_content">
           <ImageSide>
             {isSelected ? <CheckIcon /> : null}
-            <Image src={data?.image} alt={data?.title} />
+            <Image src={data?.img} alt={data?.name} />
           </ImageSide>
           <TextSide>
-            <H3>{data?.title}</H3>
+            <H3>{data?.name}</H3>
+            <P>{data?.brand}</P>
             <H5>${data?.price.toFixed(2)}</H5>
           </TextSide>
         </CardContent>

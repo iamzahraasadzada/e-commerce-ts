@@ -8,7 +8,7 @@ const StyledSearchBar = styled.div`
   width: 30rem;
   display: flex;
   align-items: center;
-  margin-left: 10rem;
+  margin-left: auto;
 `;
 
 const Input = styled.input`

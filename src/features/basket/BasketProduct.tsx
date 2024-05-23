@@ -1,9 +1,9 @@
 import { IoClose } from "react-icons/io5";
-import { productsTypes } from "../../types/Products";
 import { useAppDispatch } from "../../store";
 import { remove, toggle } from "./basketSlice";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { productsTypes } from "../../types/Products";
 
 const StyledBasketProduct = styled.div`
   border: 1px solid #e1e1e1;
@@ -58,6 +58,11 @@ const RemoveButton = styled.button`
   background: transparent;
 `;
 
+const P = styled.p`
+  color: #8d8d8d;
+  font-size: 1.2rem;
+`;
+
 interface BasketProductProps {
   data: productsTypes;
 }
@@ -77,12 +82,13 @@ export default function BasketProduct({ data }: BasketProductProps) {
     <StyledBasketProduct>
       <Grid>
         <ImageBox>
-          <Image src={data.image} alt={data.title} />
+          <Image src={data.img} alt={data.name} />
         </ImageBox>
         <InfoBox>
           <StyledLink to={`/product/${data.id}`} onClick={() => handleClick()}>
-            {data.title}
+            {data.name}
           </StyledLink>
+          <P>{data.brand}</P>
         </InfoBox>
         <Price>$ {data.price.toFixed(2)}</Price>
         <RemoveButton onClick={() => handleRemove(data.id)}>
