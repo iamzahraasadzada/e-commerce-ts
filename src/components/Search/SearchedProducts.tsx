@@ -29,7 +29,7 @@ export default function SearchedProducts() {
   );
 
   const { data } = useQuery<productsTypes[] | null>({
-    queryKey: ["products"],
+    queryKey: ["searchedProducts"],
     queryFn: () => getSearchedProducts(productName),
   });
 

@@ -1,4 +1,4 @@
-import { productsTypes } from "../types/Products";
+import { adedProductTypes, productsTypes } from "../types/Products";
 
 export async function getProducts(): Promise<productsTypes[]> {
   const res = await fetch("http://localhost:4000/products");
@@ -41,4 +41,39 @@ export async function getSearchedProducts(
       return null;
     }
   });
+}
+
+export async function removeProduct(id: number) {
+  const res = await fetch("http://localhost:4000/products", {
+    method: "DELETE",
+    body: JSON.stringify({ id: id }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!res.ok) throw new Error();
+
+  const data = await res.json();
+
+  console.log("succes");
+
+  return data;
+}
+
+export async function addProduct(data: adedProductTypes) {
+  const res = await fetch("http://localhost:4000/products", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!res.ok) throw new Error();
+
+  const returnedData = await res.json();
+  console.log(returnedData);
+
+  return returnedData;
 }

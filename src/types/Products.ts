@@ -5,3 +5,10 @@ export type productsTypes = {
   price: number;
   img: string;
 };
+
+export type adedProductTypes = {
+  name: string;
+  brand: string;
+  price: number;
+  img: string;
+};

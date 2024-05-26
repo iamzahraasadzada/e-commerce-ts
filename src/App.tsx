@@ -5,6 +5,9 @@ import Shop from "./pages/Shop";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Product from "./pages/Product";
 import Search from "./pages/Search";
+import Login from "./pages/Login";
+import ProtectedRoute from "./ui/ProtectedRoute";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,6 +28,15 @@ export default function App() {
             <Route element={<Product />} path="/product/:productId" />
             <Route element={<Search />} path="/search/:productName" />
           </Route>
+          <Route element={<Login />} path="/login" />
+          <Route
+            element={
+              <ProtectedRoute>
+                <Admin />
+              </ProtectedRoute>
+            }
+            path="/admin"
+          />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

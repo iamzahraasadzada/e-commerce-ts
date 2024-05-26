@@ -47,7 +47,7 @@ interface ProductsProps {
 
 export default function Products({ title, first, last }: ProductsProps) {
   const { data: products } = useQuery<productsTypes[]>({
-    queryKey: ["salam"],
+    queryKey: ["products"],
     queryFn: getProducts,
   });
 

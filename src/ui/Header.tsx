@@ -4,18 +4,15 @@ import Navbar from "./Navbar";
 import { useAppSelector } from "../store";
 import Basket from "../features/basket/Basket";
 import SearchBar from "../components/Search/SearchBar";
+import BasketButton from "../features/basket/BasketButton";
 
 const StyledHeader = styled.div`
-  padding: 3rem 1rem 0.5rem;
-  background: #f9f9f9;
-`;
-
-const Container = styled.div`
-  max-width: 130rem;
-  margin: 0 auto;
+  /* overflow-x: hidden; */
+  padding: 2rem 6rem;
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 2rem;
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
 `;
 
 export default function Header() {
@@ -23,11 +20,10 @@ export default function Header() {
 
   return (
     <StyledHeader>
-      <Container>
-        <Logo />
-        <Navbar />
-        <SearchBar />
-      </Container>
+      <Logo />
+      <Navbar />
+      <SearchBar />
+      <BasketButton />
       {basket ? <Basket /> : null}
     </StyledHeader>
   );

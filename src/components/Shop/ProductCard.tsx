@@ -71,7 +71,7 @@ const H3 = styled.h3`
   max-width: 12rem;
   display: block;
   white-space: nowrap;
-  overflow: hidden;
+  overflow-x: clip;
   text-overflow: ellipsis;
   width: 100%;
   height: 2rem;
