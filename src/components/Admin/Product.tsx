@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { productsTypes } from "../../types/Products";
 import { CiTrash } from "react-icons/ci";
 import { useRemove } from "./useRemove";
-import { useQueryClient } from "@tanstack/react-query";
+import { capitalizeFirstLetter } from "../../utils/helper";
 
 interface ProductProps {
   data: productsTypes;
@@ -64,10 +64,6 @@ const Icon = styled(CiTrash)`
 
 export default function Product({ data }: ProductProps) {
   const { remove, isPending } = useRemove();
-  function capitalizeFirstLetter(word: string) {
-    const firstLetter = word.split("")[0];
-    return word.replace(firstLetter, firstLetter.toUpperCase());
-  }
 
   async function handleClick(id: number) {
     if (!id) return;

@@ -39,8 +39,6 @@ export default function AddBasketButton({
 
   const dispatch = useAppDispatch();
 
-  console.log(basket);
-
   function handleClick() {
     if (data) {
       dispatch(addProduct(data));

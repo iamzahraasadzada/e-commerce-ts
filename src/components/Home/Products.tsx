@@ -43,16 +43,22 @@ interface ProductsProps {
   title: string;
   first: number;
   last: number;
+  className?: string;
 }
 
-export default function Products({ title, first, last }: ProductsProps) {
+export default function Products({
+  title,
+  first,
+  last,
+  className,
+}: ProductsProps) {
   const { data: products } = useQuery<productsTypes[]>({
     queryKey: ["products"],
     queryFn: getProducts,
   });
 
   return (
-    <StyledProducts>
+    <StyledProducts className={className ? className : ""}>
       <Container>
         <ProductsHeader>
           <Title>{title}</Title>

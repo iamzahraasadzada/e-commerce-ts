@@ -6,6 +6,9 @@ import { useEffect } from "react";
 import AddBasketButton from "../../features/basket/AddBasketButton";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { productsTypes } from "../../types/Products";
+import { useAppSelector } from "../../store";
+import RemoveBasket from "./RemoveBasket";
+import { capitalizeFirstLetter } from "../../utils/helper";
 
 const StyledeProductDetails = styled.div`
   padding: 5rem 0;
@@ -89,6 +92,10 @@ const Divider = styled.div`
 export default function ProductDetails() {
   const { productId } = useParams();
 
+  const selectedProducts = useAppSelector(
+    (store) => store.basket.basketProducts
+  );
+
   const { isLoading, data, refetch } = useQuery<productsTypes>({
     queryKey: ["product"],
     queryFn: () => getProduct(productId),
@@ -100,6 +107,10 @@ export default function ProductDetails() {
 
   const productDetails: productsTypes | undefined =
     !isLoading && data ? data : undefined;
+
+  const isSelected = selectedProducts.some(
+    (product) => product.id === productDetails?.id
+  );
 
   return (
     <StyledeProductDetails>
@@ -113,8 +124,8 @@ export default function ProductDetails() {
             <Image src={productDetails?.img} alt={productDetails?.name} />
           </ImageSide>
           <TextSide>
-            <Span>{productDetails?.brand}</Span>
-            <H1>{productDetails?.name}</H1>
+            <Span>{capitalizeFirstLetter(productDetails?.brand)}</Span>
+            <H1>{capitalizeFirstLetter(productDetails?.name)}</H1>
             <P>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
               placeat similique dicta nulla praesentium deserunt. Corporis
@@ -122,7 +133,14 @@ export default function ProductDetails() {
             </P>
             <Divider />
             <H5>$ {productDetails?.price.toFixed(2)}</H5>
-            <AddBasketButton data={productDetails} className="some" />
+            {isSelected ? (
+              <RemoveBasket
+                dataId={productDetails?.id}
+                className="prod_btn__remove"
+              />
+            ) : (
+              <AddBasketButton data={productDetails} className="some" />
+            )}
           </TextSide>
         </ProductModal>
       </Container>

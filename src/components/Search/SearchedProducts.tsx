@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useAppSelector } from "../../store";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getSearchedProducts } from "../../services/apiProducts";
 import NotFound from "./NotFound";
 import ProductCard from "../Shop/ProductCard";
-import { productsTypes } from "../../types/Products";
+import { Oval } from "react-loader-spinner";
+import { useEffect } from "react";
 
 const StyledSearchedProducts = styled.div`
   padding: 0 2rem;
@@ -21,19 +22,47 @@ const Container = styled.div`
   justify-content: center;
 `;
 
+const FullPage = styled.div`
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export default function SearchedProducts() {
   const { productName } = useParams();
+
+  const queryClient = useQueryClient();
 
   const selectedpProducts = useAppSelector(
     (store) => store.basket.basketProducts
   );
 
-  const { data } = useQuery<productsTypes[] | null>({
-    queryKey: ["searchedProducts"],
-    queryFn: () => getSearchedProducts(productName),
+  const { mutate, isPending, data } = useMutation({
+    mutationFn: getSearchedProducts,
+    onSuccess: (data) => {
+      queryClient.setQueryData(["searchedProducts"], data);
+    },
   });
 
-  console.log(data);
+  useEffect(() => {
+    mutate(productName?.trim());
+  }, [productName]);
+
+  if (isPending)
+    return (
+      <FullPage>
+        <Oval
+          visible={true}
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="oval-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </FullPage>
+    );
 
   return (
     <StyledSearchedProducts>

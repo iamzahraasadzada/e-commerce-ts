@@ -3,6 +3,7 @@ import { productsTypes } from "../../types/Products";
 import { getProducts } from "../../services/apiProducts";
 import styled from "styled-components";
 import Product from "./Product";
+import { capitalizeFirstLetter } from "../../utils/helper";
 
 const StyledProducts = styled.div`
   padding: 2rem 3rem;
@@ -21,6 +22,7 @@ export default function Products() {
     queryKey: ["products"],
     queryFn: getProducts,
   });
+
   return (
     <StyledProducts>
       <Container>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { CiSearch } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -49,8 +50,12 @@ export default function SearchBar() {
   function handleEvent(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.keyCode === 13) {
       const name = searchName?.toLowerCase().trim();
-      setSearchName("");
-      navigate(`/search/${name}`);
+      if (name?.length <= 2) {
+        toast.error("Product name must be at least 3 characters long");
+      } else {
+        setSearchName("");
+        navigate(`/search/${name}`);
+      }
     }
   }
 

@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { useAppDispatch } from "../../store";
-import { remove } from "./basketSlice";
+import { remove } from "../../features/basket/basketSlice";
 
 const StyledRemoveBasketButton = styled.button`
   font-size: 1.2rem;
   padding: 1.2rem 1.6rem;
-  background: #101010;
-  border: 1px solid #101010;
-  color: #fff;
+  background: #e1e1e1;
+  border: 1px solid #9d9d9d !important;
+  color: black !important;
   font-weight: 700;
   position: relative;
 
@@ -20,7 +20,7 @@ const StyledRemoveBasketButton = styled.button`
   &:hover {
     cursor: pointer;
     border: 1px solid #e1e1e1 !important;
-    background: #e1e1e1 !important;
+    background: #f0f0f0 !important;
     text-decoration: none !important;
   }
 `;
@@ -39,10 +39,7 @@ export default function RemoveBasket({ dataId, className }: RemoveBasketProps) {
   }
 
   return (
-    <StyledRemoveBasketButton
-      onClick={() => handleClick()}
-      className={className}
-    >
+    <StyledRemoveBasketButton onClick={() => handleClick()}>
       Remove from Basket
     </StyledRemoveBasketButton>
   );

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { productsTypes } from "../../types/Products";
+import { capitalizeFirstLetter } from "../../utils/helper";
 
 const StyledProduct = styled(Link)`
   max-height: 30rem;
@@ -52,11 +53,11 @@ export default function Product({ data }: ProductProps) {
   return (
     <StyledProduct to={`/product/${data?.id}`}>
       <ImageSide>
-        <Image src={data.img} alt={data.name} />
+        <Image src={data?.img} alt={data?.name} />
       </ImageSide>
       <TextSide>
-        <H5>{data.name}</H5>
-        <P>{data.brand}</P>
+        <H5>{capitalizeFirstLetter(data?.name)}</H5>
+        <P>{capitalizeFirstLetter(data?.brand)}</P>
       </TextSide>
     </StyledProduct>
   );

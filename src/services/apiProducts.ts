@@ -27,9 +27,10 @@ export async function getSearchedProducts(
 
   return data.filter((el) => {
     if (el.name.split(" ").length >= 2) {
-      const first = el.name.split(" ")[0].toLowerCase();
+      const first = el.name.split(" ")[0].toLowerCase().trim();
       if (searchedName) {
-        if (first.includes(searchedName)) return el;
+        if (first.includes(searchedName.split(" ")[0].toLowerCase().trim()))
+          return el;
       }
 
       return null;
@@ -55,9 +56,6 @@ export async function removeProduct(id: number) {
   if (!res.ok) throw new Error();
 
   const data = await res.json();
-
-  console.log("succes");
-
   return data;
 }
 
@@ -73,7 +71,5 @@ export async function addProduct(data: adedProductTypes) {
   if (!res.ok) throw new Error();
 
   const returnedData = await res.json();
-  console.log(returnedData);
-
   return returnedData;
 }

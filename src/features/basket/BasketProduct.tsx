@@ -4,6 +4,7 @@ import { remove, toggle } from "./basketSlice";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { productsTypes } from "../../types/Products";
+import { capitalizeFirstLetter } from "../../utils/helper";
 
 const StyledBasketProduct = styled.div`
   border: 1px solid #e1e1e1;
@@ -86,11 +87,11 @@ export default function BasketProduct({ data }: BasketProductProps) {
         </ImageBox>
         <InfoBox>
           <StyledLink to={`/product/${data.id}`} onClick={() => handleClick()}>
-            {data.name}
+            {capitalizeFirstLetter(data?.name)}
           </StyledLink>
-          <P>{data.brand}</P>
+          <P>{capitalizeFirstLetter(data?.brand)}</P>
         </InfoBox>
-        <Price>$ {data.price.toFixed(2)}</Price>
+        <Price>$ {data?.price.toFixed(2)}</Price>
         <RemoveButton onClick={() => handleRemove(data.id)}>
           <IoClose />
         </RemoveButton>

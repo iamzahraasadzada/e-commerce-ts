@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import AddBasketButton from "../../features/basket/AddBasketButton";
 import RemoveBasket from "../../features/basket/RemoveBasket";
 import { productsTypes } from "../../types/Products";
+import { capitalizeFirstLetter } from "../../utils/helper";
 
 const StyledProductCart = styled.div`
   position: relative;
@@ -108,8 +109,8 @@ export default function ProductCard({ data, isSelected }: productCardProps) {
             <Image src={data?.img} alt={data?.name} />
           </ImageSide>
           <TextSide>
-            <H3>{data?.name}</H3>
-            <P>{data?.brand}</P>
+            <H3>{capitalizeFirstLetter(data?.name)}</H3>
+            <P>{capitalizeFirstLetter(data?.brand)}</P>
             <H5>${data?.price.toFixed(2)}</H5>
           </TextSide>
         </CardContent>

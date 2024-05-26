@@ -3,7 +3,12 @@ import { productsTypes } from "../../types/Products";
 
 const basketFromLocalStorage = localStorage.getItem("basket");
 
-const initialState = {
+interface StateType {
+  isOpen: boolean;
+  basketProducts: productsTypes[];
+}
+
+const initialState: StateType = {
   isOpen: false,
   basketProducts: basketFromLocalStorage
     ? [...JSON.parse(basketFromLocalStorage)]
