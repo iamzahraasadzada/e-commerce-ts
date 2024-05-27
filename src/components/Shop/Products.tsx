@@ -5,10 +5,14 @@ import { getProducts } from "../../services/apiProducts";
 import ProductCard from "./ProductCard";
 import { useAppSelector } from "../../store";
 import { productsTypes } from "../../types/Products";
+import FullPageSpinner from "../../ui/FullPageSpinner";
 
 const StyledProducts = styled.div`
   padding: 0 2rem;
   margin: 10rem 0 15rem;
+  @media (max-width: 480px) {
+    margin-bottom: 20rem !important;
+  }
 `;
 
 const Container = styled.div`
@@ -21,6 +25,9 @@ const ProductsWrapper = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 1.2rem;
   justify-content: center;
+  @media (max-width: 480px) {
+    justify-items: center;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -78,6 +85,8 @@ export default function Products() {
   function HandleClick() {
     setShowMore(true);
   }
+
+  if (isLoading) return <FullPageSpinner />;
 
   return (
     <StyledProducts>

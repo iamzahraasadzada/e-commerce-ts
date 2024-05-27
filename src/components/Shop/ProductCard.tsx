@@ -98,6 +98,8 @@ interface productCardProps {
 }
 
 export default function ProductCard({ data, isSelected }: productCardProps) {
+  const basketData = { ...data, quantity: 1 };
+
   return (
     <StyledProductCart
       className={"product_card" + (isSelected ? " selected" : "")}
@@ -118,7 +120,7 @@ export default function ProductCard({ data, isSelected }: productCardProps) {
       {isSelected ? (
         <RemoveBasket dataId={data.id} className="prod_btn__remove" />
       ) : (
-        <AddBasketButton data={data} className="prod_btn" />
+        <AddBasketButton data={basketData} className="prod_btn" />
       )}
     </StyledProductCart>
   );

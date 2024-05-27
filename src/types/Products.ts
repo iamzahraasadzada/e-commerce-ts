@@ -12,3 +12,7 @@ export type adedProductTypes = {
   price: number;
   img: string;
 };
+
+export type basketProduct = productsTypes & {
+  quantity: number;
+};

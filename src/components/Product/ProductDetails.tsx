@@ -9,13 +9,15 @@ import { productsTypes } from "../../types/Products";
 import { useAppSelector } from "../../store";
 import RemoveBasket from "./RemoveBasket";
 import { capitalizeFirstLetter } from "../../utils/helper";
+import FullPageSpinner from "../../ui/FullPageSpinner";
 
 const StyledeProductDetails = styled.div`
   padding: 5rem 0;
 `;
 
 const Container = styled.div`
-  max-width: 110rem;
+  max-width: 120rem;
+  padding: 0 5rem;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -41,6 +43,9 @@ const ProductModal = styled.div`
   grid-template-columns: 40% 60%;
   background: #fff;
   border: 1px solid #e1e1e1;
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const ImageSide = styled.div`
@@ -96,6 +101,10 @@ export default function ProductDetails() {
     (store) => store.basket.basketProducts
   );
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [productId]);
+
   const { isLoading, data, refetch } = useQuery<productsTypes>({
     queryKey: ["product"],
     queryFn: () => getProduct(productId),
@@ -112,6 +121,12 @@ export default function ProductDetails() {
     (product) => product.id === productDetails?.id
   );
 
+  let basketData;
+
+  if (productDetails !== undefined) {
+    basketData = { ...productDetails, quantity: 1 };
+  }
+
   return (
     <StyledeProductDetails>
       <Container>
@@ -119,30 +134,34 @@ export default function ProductDetails() {
           <FaArrowLeftLong />
           <ButtonSpan>Back to shop</ButtonSpan>
         </BackButton>
-        <ProductModal>
-          <ImageSide>
-            <Image src={productDetails?.img} alt={productDetails?.name} />
-          </ImageSide>
-          <TextSide>
-            <Span>{capitalizeFirstLetter(productDetails?.brand)}</Span>
-            <H1>{capitalizeFirstLetter(productDetails?.name)}</H1>
-            <P>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-              placeat similique dicta nulla praesentium deserunt. Corporis
-              repellendus deleniti dolores eligendi.
-            </P>
-            <Divider />
-            <H5>$ {productDetails?.price.toFixed(2)}</H5>
-            {isSelected ? (
-              <RemoveBasket
-                dataId={productDetails?.id}
-                className="prod_btn__remove"
-              />
-            ) : (
-              <AddBasketButton data={productDetails} className="some" />
-            )}
-          </TextSide>
-        </ProductModal>
+        {isLoading ? (
+          <FullPageSpinner />
+        ) : (
+          <ProductModal>
+            <ImageSide>
+              <Image src={productDetails?.img} alt={productDetails?.name} />
+            </ImageSide>
+            <TextSide>
+              <Span>{capitalizeFirstLetter(productDetails?.brand)}</Span>
+              <H1>{capitalizeFirstLetter(productDetails?.name)}</H1>
+              <P>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
+                placeat similique dicta nulla praesentium deserunt. Corporis
+                repellendus deleniti dolores eligendi.
+              </P>
+              <Divider />
+              <H5>$ {productDetails?.price.toFixed(2)}</H5>
+              {isSelected ? (
+                <RemoveBasket
+                  dataId={productDetails?.id}
+                  className="prod_btn__remove"
+                />
+              ) : (
+                <AddBasketButton data={basketData} className="some" />
+              )}
+            </TextSide>
+          </ProductModal>
+        )}
       </Container>
     </StyledeProductDetails>
   );

@@ -23,7 +23,7 @@ const Container = styled.div`
 `;
 
 const FullPage = styled.div`
-  height: 70vh;
+  height: 45rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,7 +56,8 @@ export default function SearchedProducts() {
           visible={true}
           height="80"
           width="80"
-          color="#4fa94d"
+          color="black"
+          secondaryColor="gray"
           ariaLabel="oval-loading"
           wrapperStyle={{}}
           wrapperClass=""

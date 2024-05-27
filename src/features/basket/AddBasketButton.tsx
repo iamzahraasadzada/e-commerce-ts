@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { useAppDispatch, useAppSelector } from "../../store";
+import { useAppDispatch } from "../../store";
 import { addProduct } from "./basketSlice";
-import { productsTypes } from "../../types/Products";
+import { basketProduct } from "../../types/Products";
 
 const StyledAddBasketButton = styled.button`
   font-size: 1.2rem;
@@ -27,7 +27,7 @@ const StyledAddBasketButton = styled.button`
 `;
 
 interface addBasketButtonProps {
-  data: productsTypes | undefined;
+  data: basketProduct | undefined;
   className: string;
 }
 
@@ -35,8 +35,6 @@ export default function AddBasketButton({
   data,
   className,
 }: addBasketButtonProps) {
-  const basket = useAppSelector((state) => state.basket.basketProducts);
-
   const dispatch = useAppDispatch();
 
   function handleClick() {

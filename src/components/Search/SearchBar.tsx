@@ -3,13 +3,30 @@ import toast from "react-hot-toast";
 import { CiSearch } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { toggleSearch } from "../../features/basket/basketSlice";
 
 const StyledSearchBar = styled.div`
   position: relative;
   width: 30rem;
   display: flex;
+  background-color: #ffff;
   align-items: center;
   margin-left: auto;
+  @media (max-width: 600px) {
+    display: none;
+  }
+  z-index: 18;
+`;
+
+const Overlay = styled.div`
+  width: 100%;
+  height: 100vh;
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 const Input = styled.input`
@@ -40,8 +57,10 @@ const Icon = styled(CiSearch)`
 `;
 
 export default function SearchBar() {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [searchName, setSearchName] = useState("");
+  const isOpen = useAppSelector((store) => store.basket.isOpenSearch);
 
   function onSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchName(e.target.value);
@@ -49,6 +68,7 @@ export default function SearchBar() {
 
   function handleEvent(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.keyCode === 13) {
+      dispatch(toggleSearch(false));
       const name = searchName?.toLowerCase().trim();
       if (name?.length <= 2) {
         toast.error("Product name must be at least 3 characters long");
@@ -60,16 +80,25 @@ export default function SearchBar() {
   }
 
   return (
-    <StyledSearchBar>
-      <Icon />
-      <Input
-        type="text"
-        name="searchBar"
-        value={searchName}
-        onKeyDown={(e) => handleEvent(e)}
-        onChange={(e) => onSearchChange(e)}
-        placeholder="Search product..."
-      />
-    </StyledSearchBar>
+    <>
+      {isOpen ? (
+        <Overlay
+          onClick={() => {
+            dispatch(toggleSearch(false));
+          }}
+        />
+      ) : null}
+      <StyledSearchBar className={isOpen ? "opened" : ""}>
+        <Icon />
+        <Input
+          type="text"
+          name="searchBar"
+          value={searchName}
+          onKeyDown={(e) => handleEvent(e)}
+          onChange={(e) => onSearchChange(e)}
+          placeholder="Search product..."
+        />
+      </StyledSearchBar>
+    </>
   );
 }

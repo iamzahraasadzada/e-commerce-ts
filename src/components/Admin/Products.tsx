@@ -3,10 +3,10 @@ import { productsTypes } from "../../types/Products";
 import { getProducts } from "../../services/apiProducts";
 import styled from "styled-components";
 import Product from "./Product";
-import { capitalizeFirstLetter } from "../../utils/helper";
 
 const StyledProducts = styled.div`
-  padding: 2rem 3rem;
+  padding: 2rem 5rem;
+  margin-bottom: 5rem;
 `;
 
 const Container = styled.div`

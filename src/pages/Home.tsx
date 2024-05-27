@@ -1,7 +1,12 @@
+import { useEffect } from "react";
 import Banner from "../components/Home/Banner";
 import Products from "../components/Home/Products";
 
 export default function Home() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Banner />

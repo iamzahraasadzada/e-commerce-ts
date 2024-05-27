@@ -3,6 +3,7 @@ import Logo from "../../ui/Logo";
 import { useState } from "react";
 import { useLogin } from "./useLogin";
 import MiniSpiner from "../../ui/MiniSpiner";
+import toast from "react-hot-toast";
 
 // import { login } from "../../services/apuAuth";
 const FullPageContainer = styled.div`
@@ -31,6 +32,9 @@ const StyledLoginForm = styled.form`
     rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   padding: 6rem 4rem;
   margin: 0 2rem;
+  @media (max-width: 340px) {
+    width: 32rem;
+  }
 `;
 
 const FormRow = styled.div`
@@ -87,7 +91,12 @@ export default function LoginForm() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!email || !password) return;
+    if (!email || !password) {
+      !email && toast.error("Email must be entered", { position: "top-right" });
+      !password &&
+        toast.error("Password must be entered", { position: "top-right" });
+      return;
+    }
     login(
       { email, password },
       {
@@ -114,7 +123,7 @@ export default function LoginForm() {
               autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              //   disabled={isLoading}
+              disabled={isPending}
             />
           </FormRow>
           <FormRow>
@@ -125,7 +134,7 @@ export default function LoginForm() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              //   disabled={isLoading}
+              disabled={isPending}
             />
           </FormRow>
           <Button type="submit">{isPending ? <MiniSpiner /> : "Log in"}</Button>

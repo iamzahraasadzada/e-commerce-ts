@@ -30,7 +30,7 @@ interface RemoveBasketProps {
   dataId: number | undefined;
 }
 
-export default function RemoveBasket({ dataId, className }: RemoveBasketProps) {
+export default function RemoveBasket({ dataId }: RemoveBasketProps) {
   const dispatch = useAppDispatch();
 
   function handleClick() {

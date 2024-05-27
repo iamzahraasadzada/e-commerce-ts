@@ -10,10 +10,8 @@ interface ProductProps {
 
 const StyledProduct = styled.div`
   display: grid;
-  grid-template-columns: 40% 60%;
-  /* box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px; */
-  /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
-  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+  grid-template-columns: 80% 20%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
 const DetailsSide = styled.div`
@@ -47,23 +45,21 @@ const ButtonSide = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   padding: 2rem;
 `;
 
-const RemoveButton = styled.button`
-  height: 100%;
-  border: 0;
-  background-color: #bf3131;
-  padding: 0 2rem;
-`;
-
 const Icon = styled(CiTrash)`
-  font-size: 3.5rem;
-  color: #fff;
+  font-size: 4rem;
+  color: #bf3131;
+  cursor: pointer;
+  @media (max-width: 500px) {
+    /* font-size: 10rem; */
+  }
 `;
 
 export default function Product({ data }: ProductProps) {
-  const { remove, isPending } = useRemove();
+  const { remove } = useRemove();
 
   async function handleClick(id: number) {
     if (!id) return;
@@ -83,9 +79,8 @@ export default function Product({ data }: ProductProps) {
         </TextSide>
       </DetailsSide>
       <ButtonSide>
-        <RemoveButton onClick={() => handleClick(data?.id)}>
-          <Icon />
-        </RemoveButton>
+        {/* <RemoveButton onClick={() => handleClick(data?.id)}> */}
+        <Icon onClick={() => handleClick(data?.id)} />
       </ButtonSide>
     </StyledProduct>
   );

@@ -26,14 +26,16 @@ const Quantity = styled.div`
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
+  z-index: 4;
   background: rgba(247, 45, 45, 0.986);
   position: absolute;
-  top: -1.2rem;
-  right: -1.5rem;
+  top: -0.2rem;
+  right: -0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 700;
+  cursor: pointer;
 `;
 
 const Span = styled.span`
@@ -55,7 +57,7 @@ export default function BasketButton() {
   return (
     <BasketButtonContainer>
       {quantity > 0 ? (
-        <Quantity>
+        <Quantity onClick={() => handleClick()}>
           <Span>{quantity}</Span>
         </Quantity>
       ) : null}

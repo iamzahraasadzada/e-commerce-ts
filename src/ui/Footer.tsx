@@ -16,6 +16,10 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 2rem;
+  }
 `;
 
 const FooterCol = styled.div``;

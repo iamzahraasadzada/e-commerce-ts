@@ -1,25 +1,27 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { productsTypes } from "../../types/Products";
+import { basketProduct } from "../../types/Products";
 
 const basketFromLocalStorage = localStorage.getItem("basket");
 
 interface StateType {
   isOpen: boolean;
-  basketProducts: productsTypes[];
+  basketProducts: basketProduct[];
+  isOpenSearch: boolean;
 }
 
 const initialState: StateType = {
   isOpen: false,
   basketProducts: basketFromLocalStorage
     ? [...JSON.parse(basketFromLocalStorage)]
-    : ([] as productsTypes[]),
+    : ([] as basketProduct[]),
+  isOpenSearch: false,
 };
 
 export const basketSlice = createSlice({
   name: "basket",
   initialState,
   reducers: {
-    addProduct(state, action: PayloadAction<productsTypes>) {
+    addProduct(state, action: PayloadAction<basketProduct>) {
       state.basketProducts.push(action.payload);
       localStorage.setItem("basket", JSON.stringify(state.basketProducts));
     },
@@ -43,8 +45,35 @@ export const basketSlice = createSlice({
       localStorage.setItem("basket", JSON.stringify(filtred));
       state.basketProducts = [...filtred];
     },
+    increaseQuantity(state, action: PayloadAction<number>) {
+      state.basketProducts = state.basketProducts.map((data) => {
+        return data.id === action.payload
+          ? { ...data, quantity: data.quantity + 1 }
+          : { ...data };
+      });
+      localStorage.setItem("basket", JSON.stringify(state.basketProducts));
+    },
+    decreaseQuantity(state, action: PayloadAction<number>) {
+      state.basketProducts = state.basketProducts.map((data) => {
+        return data.id === action.payload
+          ? { ...data, quantity: data.quantity - 1 }
+          : { ...data };
+      });
+      localStorage.setItem("basket", JSON.stringify(state.basketProducts));
+    },
+    toggleSearch(state, action: PayloadAction<boolean>) {
+      state.isOpenSearch = action.payload;
+    },
   },
 });
 
-export const { addProduct, toggle, clear, remove } = basketSlice.actions;
+export const {
+  addProduct,
+  toggle,
+  clear,
+  remove,
+  increaseQuantity,
+  decreaseQuantity,
+  toggleSearch,
+} = basketSlice.actions;
 export default basketSlice.reducer;

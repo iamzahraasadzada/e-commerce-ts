@@ -71,6 +71,7 @@
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 #root {
@@ -88,6 +89,18 @@ html {
 @media (max-width: 600px) {
   html {
     font-size: 56%;
+  }
+}
+
+@media (max-width: 420px) {
+  html {
+    font-size: 52%;
+  }
+}
+
+@media (max-width: 380px) {
+  html {
+    font-size: 48%;
   }
 }
 
@@ -248,6 +261,19 @@ img {
 .mb-sm {
   margin-bottom: 5rem !important;
 }
+
+.disable {
+  cursor: not-allowed !important;
+  opacity: 0.3;
+}
+
+.opened {
+  display: block !important;
+  position: absolute !important;
+  left: 12%;
+  top: 7rem;
+}
+
 /*
 FOR DARK MODE
 

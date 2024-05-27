@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { clear, toggle } from "./basketSlice";
 import BasketProduct from "./BasketProduct";
-import { productsTypes } from "../../types/Products";
+import { basketProduct } from "../../types/Products";
 
 const Overlay = styled.div`
   width: 100%;
@@ -28,6 +28,9 @@ const StyledBasket = styled.div`
   -ms-transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
   transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 100;
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 const BasketHeader = styled.div`
@@ -157,8 +160,8 @@ export default function Basket() {
     dispatch(clear());
   }
 
-  const subTotal = basket?.reduce((acc, obj: productsTypes) => {
-    return acc + obj.price;
+  const subTotal = basket?.reduce((acc, obj: basketProduct) => {
+    return obj.price * obj.quantity + acc;
   }, 0);
 
   return (
@@ -168,7 +171,7 @@ export default function Basket() {
         <BasketBody>
           <BasketHeader>
             <H3>
-              My Basket &nbsp;<Span>(0 item)</Span>
+              My Basket &nbsp;<Span>({basket?.length} item)</Span>
             </H3>
             <Buttons>
               <CloseButton onClick={() => closeBasket()}>Close</CloseButton>
