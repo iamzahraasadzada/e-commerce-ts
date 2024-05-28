@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledFooter = styled.div`
-  padding: 0.5rem 1rem 3rem;
+  padding: 0.5rem 2rem 3rem;
   background: #f0f0f0;
   position: absolute;
   bottom: 0;

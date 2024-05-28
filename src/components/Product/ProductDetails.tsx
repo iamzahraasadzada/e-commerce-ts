@@ -10,6 +10,8 @@ import { useAppSelector } from "../../store";
 import RemoveBasket from "./RemoveBasket";
 import { capitalizeFirstLetter } from "../../utils/helper";
 import FullPageSpinner from "../../ui/FullPageSpinner";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const StyledeProductDetails = styled.div`
   padding: 5rem 0;
@@ -53,7 +55,7 @@ const ImageSide = styled.div`
   height: 50rem;
 `;
 
-const Image = styled.img`
+const Image = styled(LazyLoadImage)`
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -139,7 +141,13 @@ export default function ProductDetails() {
         ) : (
           <ProductModal>
             <ImageSide>
-              <Image src={productDetails?.img} alt={productDetails?.name} />
+              <Image
+                effect="blur"
+                width={"100%"}
+                height={"100%"}
+                src={productDetails?.img}
+                alt={productDetails?.name}
+              />
             </ImageSide>
             <TextSide>
               <Span>{capitalizeFirstLetter(productDetails?.brand)}</Span>

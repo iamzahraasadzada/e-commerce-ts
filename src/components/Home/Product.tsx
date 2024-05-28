@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { productsTypes } from "../../types/Products";
 import { capitalizeFirstLetter } from "../../utils/helper";
+// import { LazyLoadImage } from "react-lazy-load-image-component";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const StyledProduct = styled(Link)`
   max-height: 30rem;
@@ -53,6 +55,14 @@ export default function Product({ data }: ProductProps) {
   return (
     <StyledProduct to={`/product/${data?.id}`}>
       <ImageSide>
+        <LazyLoadImage
+          alt={data?.name}
+          src={data?.img}
+          width={"100%"}
+          style={{ objectFit: "contain" }}
+          height={"100%"}
+          effect="blur"
+        />
         <Image src={data?.img} alt={data?.name} />
       </ImageSide>
       <TextSide>

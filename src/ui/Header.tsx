@@ -8,7 +8,7 @@ import BasketButton from "../features/basket/BasketButton";
 import SearchButton from "./SearchButton";
 
 const StyledHeader = styled.div`
-  padding: 2rem 6rem;
+  padding: 2rem 2rem;
   display: flex;
   align-items: center;
   gap: 2rem;

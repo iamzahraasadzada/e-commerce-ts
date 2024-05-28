@@ -5,6 +5,7 @@ import AddBasketButton from "../../features/basket/AddBasketButton";
 import RemoveBasket from "../../features/basket/RemoveBasket";
 import { productsTypes } from "../../types/Products";
 import { capitalizeFirstLetter } from "../../utils/helper";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const StyledProductCart = styled.div`
   position: relative;
@@ -45,7 +46,7 @@ const CheckIcon = styled(FaCheck)`
   z-index: 1;
 `;
 
-const Image = styled.img`
+const Image = styled(LazyLoadImage)`
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -108,7 +109,13 @@ export default function ProductCard({ data, isSelected }: productCardProps) {
         <CardContent className="card_content">
           <ImageSide>
             {isSelected ? <CheckIcon /> : null}
-            <Image src={data?.img} alt={data?.name} />
+            <Image
+              src={data?.img}
+              alt={data?.name}
+              effect="blur"
+              width={"100%"}
+              height={"100%"}
+            />
           </ImageSide>
           <TextSide>
             <H3>{capitalizeFirstLetter(data?.name)}</H3>

@@ -10,6 +10,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { basketProduct } from "../../types/Products";
 import { capitalizeFirstLetter } from "../../utils/helper";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const StyledBasketProduct = styled.div`
   border: 1px solid #e1e1e1;
@@ -50,7 +51,7 @@ const ImageBox = styled.div`
   padding: 1rem;
 `;
 
-const Image = styled.img`
+const Image = styled(LazyLoadImage)`
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -143,7 +144,7 @@ export default function BasketProduct({ data }: BasketProductProps) {
           </Button>
         </QuantityButtons>
         <ImageBox>
-          <Image src={data.img} alt={data.name} />
+          <Image effect="blur" src={data.img} alt={data.name} />
         </ImageBox>
         <InfoBox>
           <StyledLink to={`/product/${data.id}`} onClick={() => handleClick()}>

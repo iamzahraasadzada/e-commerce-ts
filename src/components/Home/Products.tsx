@@ -7,7 +7,7 @@ import { productsTypes } from "../../types/Products";
 import { ProgressBar } from "react-loader-spinner";
 
 const StyledProducts = styled.div`
-  padding: 0 2rem;
+  padding: 0 4rem;
   margin: 10rem 0 25rem;
 `;
 
@@ -35,6 +35,9 @@ const ProductsHeader = styled.div`
 const Title = styled.h3`
   color: #1a1a1a;
   font-size: 3.2rem;
+  @media (max-width: 460px) {
+    font-size: 2.8rem;
+  }
   @media (max-width: 340px) {
     text-align: center;
   }
@@ -45,6 +48,9 @@ const Button = styled(Link)`
   margin-left: auto;
   font-size: 1.8rem;
   color: #101010;
+  @media (max-width: 460px) {
+    font-size: 1.6rem;
+  }
   @media (max-width: 340px) {
     display: none;
   }

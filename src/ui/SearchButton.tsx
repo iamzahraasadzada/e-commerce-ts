@@ -6,7 +6,7 @@ import { useAppDispatch } from "../store";
 const StyledSearchButton = styled(BiSearchAlt2)`
   display: none;
   font-size: 2.2rem;
-  @media (max-width: 600px) {
+  @media (max-width: 690px) {
     display: initial;
   }
 `;

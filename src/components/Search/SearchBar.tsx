@@ -13,7 +13,7 @@ const StyledSearchBar = styled.div`
   background-color: #ffff;
   align-items: center;
   margin-left: auto;
-  @media (max-width: 600px) {
+  @media (max-width: 690px) {
     display: none;
   }
   z-index: 18;

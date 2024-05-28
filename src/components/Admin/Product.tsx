@@ -3,6 +3,7 @@ import { productsTypes } from "../../types/Products";
 import { CiTrash } from "react-icons/ci";
 import { useRemove } from "./useRemove";
 import { capitalizeFirstLetter } from "../../utils/helper";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 interface ProductProps {
   data: productsTypes;
@@ -25,7 +26,7 @@ const ImageSide = styled.div`
   border: 1px solid #f2f2f2;
 `;
 
-const Image = styled.img`
+const Image = styled(LazyLoadImage)`
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -70,7 +71,13 @@ export default function Product({ data }: ProductProps) {
     <StyledProduct>
       <DetailsSide>
         <ImageSide>
-          <Image src={data?.img} alt={data?.name} />
+          <Image
+            width={"100%"}
+            height={"100%"}
+            effect="blur"
+            src={data?.img}
+            alt={data?.name}
+          />
         </ImageSide>
         <TextSide>
           <Name>{capitalizeFirstLetter(data?.name)}</Name>
